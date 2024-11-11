@@ -1,0 +1,493 @@
+[debug] [2024-11-11T18:16:46.178Z] ----------------------------------------------------------------------
+[debug] [2024-11-11T18:16:46.184Z] Command:       /home/edison/node-v20.16.0/bin/node /home/edison/node-v20.16.0/bin/firebase hosting:channel:deploy demo
+[debug] [2024-11-11T18:16:46.185Z] CLI Version:   13.24.2
+[debug] [2024-11-11T18:16:46.186Z] Platform:      linux
+[debug] [2024-11-11T18:16:46.186Z] Node Version:  v20.16.0
+[debug] [2024-11-11T18:16:46.186Z] Time:          Mon Nov 11 2024 13:16:46 GMT-0500 (hora estándar de Colombia)
+[debug] [2024-11-11T18:16:46.187Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-11T18:16:46.269Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-11T18:16:46.270Z] > authorizing via signed-in user (edisonisaza@gmail.com)
+[debug] [2024-11-11T18:16:46.270Z] [iam] checking project edison-79754 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-11-11T18:16:46.272Z] Checked if tokens are valid: false, expires at: 1731298082535
+[debug] [2024-11-11T18:16:46.273Z] Checked if tokens are valid: false, expires at: 1731298082535
+[debug] [2024-11-11T18:16:46.273Z] > refreshing access token with scopes: []
+[debug] [2024-11-11T18:16:46.276Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-11-11T18:16:46.277Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-11-11T18:16:46.657Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-11-11T18:16:46.658Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-11-11T18:16:46.728Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions [none]
+[debug] [2024-11-11T18:16:46.728Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions x-goog-quota-user=projects/edison-79754
+[debug] [2024-11-11T18:16:46.729Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:16:47.179Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions 200
+[debug] [2024-11-11T18:16:47.180Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:16:47.181Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:47.181Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:47.182Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 [none]
+[debug] [2024-11-11T18:16:47.722Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 200
+[debug] [2024-11-11T18:16:47.722Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 {"projectId":"edison-79754","projectNumber":"1097612680420","displayName":"edison","name":"projects/edison-79754","resources":{"hostingSite":"edison-79754"},"state":"ACTIVE","etag":"1_9a65506b-7595-4ec2-bc18-3824f24f6f67"}
+[debug] [2024-11-11T18:16:47.726Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:47.727Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:47.727Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:16:48.258Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:16:48.258Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T03:11:28.810Z","retainedReleaseCount":10,"expireTime":"2024-11-18T03:10:59.976742903Z"}
+[debug] [2024-11-11T18:16:48.259Z] [hosting] found existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T03:11:28.810Z","retainedReleaseCount":10,"expireTime":"2024-11-18T03:10:59.976742903Z"}
+[debug] [2024-11-11T18:16:48.259Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:48.260Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:48.261Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo updateMask=ttl
+[debug] [2024-11-11T18:16:48.261Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"ttl":"604800s"}
+[debug] [2024-11-11T18:16:48.416Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:16:48.416Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:16:48.331041375Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:16:48.331041375Z"}
+[debug] [2024-11-11T18:16:48.417Z] [hosting] updated TTL for existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:16:48.331041375Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:16:48.331041375Z"}
+[debug] [2024-11-11T18:16:50.285Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:50.285Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:50.286Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites pageToken=&pageSize=10
+[debug] [2024-11-11T18:16:50.524Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites 200
+[debug] [2024-11-11T18:16:50.524Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites {"sites":[{"name":"projects/edison-79754/sites/edison-79754","defaultUrl":"https://edison-79754.web.app","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","type":"DEFAULT_SITE"}]}
+[debug] [2024-11-11T18:16:50.525Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:50.525Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:50.526Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config [none]
+[debug] [2024-11-11T18:16:51.084Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config 200
+[debug] [2024-11-11T18:16:51.084Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config {"projectId":"edison-79754","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","storageBucket":"edison-79754.firebasestorage.app","apiKey":"AIzaSyDsPwiFrm5gKZ_cOtT84HGdIQVlzGFt2JI","authDomain":"edison-79754.firebaseapp.com","messagingSenderId":"1097612680420","measurementId":"G-9G78Z1961S"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-11-11T18:16:54.652Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:54.652Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:16:54.653Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:16:54.768Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:16:54.769Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:16:48.331041375Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:16:48.331041375Z"}
+[info]    ▲ Next.js 15.0.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/7) ...
+
+[info]    Generating static pages (1/7) 
+
+[info]    Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ✓ Generating static pages (7/7)
+
+[info]    Finalizing page optimization ...
+   Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    52.6 kB         162 kB
+├ ○ /_not-found                          896 B           101 kB
+├ ○ /contact                             2.13 kB         149 kB
+├ ○ /projects                            58.4 kB         310 kB
+└ ƒ /projects/[slug]                     9.57 kB         224 kB
++ First Load JS shared by all            100 kB
+  ├ chunks/4bd1b696-ad6602fa076d2dfd.js  52.5 kB
+  ├ chunks/517-e1850d56ad22dc71.js       45.5 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+
+[info] ○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • non-static component /projects/[slug]/page
+[info] 
+[debug] [2024-11-11T18:17:18.691Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:17:18.691Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:17:18.691Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:17:19.212Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:17:19.212Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:16:48.331041375Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:16:48.331041375Z"}
+[debug] [2024-11-11T18:17:29.556Z] Error: Command failed: npm i --omit dev --no-audit
+    at genericNodeError (node:internal/errors:984:15)
+    at wrappedFn (node:internal/errors:538:14)
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/frameworks/index.js:371:42)
+    at async deploy (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/deploy/index.js:58:13)
+    at async Command.hostingChannelDeployAction [as actionFn] (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/commands/hosting-channel-deploy.js:90:25)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-11-11T18:22:59.262Z] ----------------------------------------------------------------------
+[debug] [2024-11-11T18:22:59.264Z] Command:       /home/edison/node-v20.16.0/bin/node /home/edison/node-v20.16.0/bin/firebase hosting:channel:deploy demo
+[debug] [2024-11-11T18:22:59.265Z] CLI Version:   13.24.2
+[debug] [2024-11-11T18:22:59.265Z] Platform:      linux
+[debug] [2024-11-11T18:22:59.265Z] Node Version:  v20.16.0
+[debug] [2024-11-11T18:22:59.265Z] Time:          Mon Nov 11 2024 13:22:59 GMT-0500 (hora estándar de Colombia)
+[debug] [2024-11-11T18:22:59.265Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-11T18:22:59.328Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-11T18:22:59.329Z] > authorizing via signed-in user (edisonisaza@gmail.com)
+[debug] [2024-11-11T18:22:59.329Z] [iam] checking project edison-79754 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-11-11T18:22:59.330Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:22:59.330Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:22:59.331Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions [none]
+[debug] [2024-11-11T18:22:59.332Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions x-goog-quota-user=projects/edison-79754
+[debug] [2024-11-11T18:22:59.332Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:22:59.852Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions 200
+[debug] [2024-11-11T18:22:59.852Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:22:59.853Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:22:59.853Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:22:59.854Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 [none]
+[debug] [2024-11-11T18:23:00.391Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 200
+[debug] [2024-11-11T18:23:00.391Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 {"projectId":"edison-79754","projectNumber":"1097612680420","displayName":"edison","name":"projects/edison-79754","resources":{"hostingSite":"edison-79754"},"state":"ACTIVE","etag":"1_9a65506b-7595-4ec2-bc18-3824f24f6f67"}
+[debug] [2024-11-11T18:23:00.395Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:00.395Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:00.396Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:23:00.897Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:23:00.898Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:16:48.331041375Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:16:48.331041375Z"}
+[debug] [2024-11-11T18:23:00.898Z] [hosting] found existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:16:48.331041375Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:16:48.331041375Z"}
+[debug] [2024-11-11T18:23:00.899Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:00.899Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:00.901Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo updateMask=ttl
+[debug] [2024-11-11T18:23:00.901Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"ttl":"604800s"}
+[debug] [2024-11-11T18:23:01.056Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:23:01.057Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:23:00.976722060Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:23:00.976722060Z"}
+[debug] [2024-11-11T18:23:01.057Z] [hosting] updated TTL for existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:23:00.976722060Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:23:00.976722060Z"}
+[debug] [2024-11-11T18:23:02.795Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:02.796Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:02.796Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites pageToken=&pageSize=10
+[debug] [2024-11-11T18:23:03.006Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites 200
+[debug] [2024-11-11T18:23:03.007Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites {"sites":[{"name":"projects/edison-79754/sites/edison-79754","defaultUrl":"https://edison-79754.web.app","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","type":"DEFAULT_SITE"}]}
+[debug] [2024-11-11T18:23:03.008Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:03.008Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:03.009Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config [none]
+[debug] [2024-11-11T18:23:03.508Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config 200
+[debug] [2024-11-11T18:23:03.509Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config {"projectId":"edison-79754","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","storageBucket":"edison-79754.firebasestorage.app","apiKey":"AIzaSyDsPwiFrm5gKZ_cOtT84HGdIQVlzGFt2JI","authDomain":"edison-79754.firebaseapp.com","messagingSenderId":"1097612680420","measurementId":"G-9G78Z1961S"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-11-11T18:23:07.067Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:07.068Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:07.068Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:23:07.344Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:23:07.344Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:23:00.976722060Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:23:00.976722060Z"}
+[info]    ▲ Next.js 15.0.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/7) ...
+
+[info]    Generating static pages (1/7) 
+
+[info]    Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ✓ Generating static pages (7/7)
+
+[info]    Finalizing page optimization ...
+   Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    52.6 kB         162 kB
+├ ○ /_not-found                          896 B           101 kB
+├ ○ /contact                             2.13 kB         149 kB
+├ ○ /projects                            58.4 kB         310 kB
+└ ƒ /projects/[slug]                     9.57 kB         224 kB
++ First Load JS shared by all            100 kB
+  ├ chunks/4bd1b696-ad6602fa076d2dfd.js  52.5 kB
+  ├ chunks/517-e1850d56ad22dc71.js       45.5 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+
+[info] ○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • non-static component /projects/[slug]/page
+[info] 
+[debug] [2024-11-11T18:23:31.044Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:31.044Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:23:31.044Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:23:31.475Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:23:31.475Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:23:00.976722060Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:23:00.976722060Z"}
+[debug] [2024-11-11T18:23:40.691Z] Error: Command failed: npm i --omit dev --no-audit
+    at genericNodeError (node:internal/errors:984:15)
+    at wrappedFn (node:internal/errors:538:14)
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/frameworks/index.js:371:42)
+    at async deploy (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/deploy/index.js:58:13)
+    at async Command.hostingChannelDeployAction [as actionFn] (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/commands/hosting-channel-deploy.js:90:25)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-11-11T18:26:40.878Z] ----------------------------------------------------------------------
+[debug] [2024-11-11T18:26:40.880Z] Command:       /home/edison/node-v20.16.0/bin/node /home/edison/node-v20.16.0/bin/firebase hosting:channel:deploy demo
+[debug] [2024-11-11T18:26:40.881Z] CLI Version:   13.24.2
+[debug] [2024-11-11T18:26:40.881Z] Platform:      linux
+[debug] [2024-11-11T18:26:40.881Z] Node Version:  v20.16.0
+[debug] [2024-11-11T18:26:40.881Z] Time:          Mon Nov 11 2024 13:26:40 GMT-0500 (hora estándar de Colombia)
+[debug] [2024-11-11T18:26:40.881Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-11T18:26:40.947Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-11T18:26:40.948Z] > authorizing via signed-in user (edisonisaza@gmail.com)
+[debug] [2024-11-11T18:26:40.948Z] [iam] checking project edison-79754 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-11-11T18:26:40.949Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:40.949Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:40.950Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions [none]
+[debug] [2024-11-11T18:26:40.950Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions x-goog-quota-user=projects/edison-79754
+[debug] [2024-11-11T18:26:40.951Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:26:41.392Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions 200
+[debug] [2024-11-11T18:26:41.392Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:26:41.393Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:41.393Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:41.394Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 [none]
+[debug] [2024-11-11T18:26:41.865Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 200
+[debug] [2024-11-11T18:26:41.866Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 {"projectId":"edison-79754","projectNumber":"1097612680420","displayName":"edison","name":"projects/edison-79754","resources":{"hostingSite":"edison-79754"},"state":"ACTIVE","etag":"1_9a65506b-7595-4ec2-bc18-3824f24f6f67"}
+[debug] [2024-11-11T18:26:41.868Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:41.869Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:41.869Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:26:42.287Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:26:42.288Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:23:00.976722060Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:23:00.976722060Z"}
+[debug] [2024-11-11T18:26:42.288Z] [hosting] found existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:23:00.976722060Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:23:00.976722060Z"}
+[debug] [2024-11-11T18:26:42.289Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:42.289Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:42.290Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo updateMask=ttl
+[debug] [2024-11-11T18:26:42.290Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"ttl":"604800s"}
+[debug] [2024-11-11T18:26:42.435Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:26:42.436Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:26:42.354685951Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:26:42.354685951Z"}
+[debug] [2024-11-11T18:26:42.436Z] [hosting] updated TTL for existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:26:42.354685951Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:26:42.354685951Z"}
+[debug] [2024-11-11T18:26:44.165Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:44.165Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:44.165Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites pageToken=&pageSize=10
+[debug] [2024-11-11T18:26:44.388Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites 200
+[debug] [2024-11-11T18:26:44.388Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites {"sites":[{"name":"projects/edison-79754/sites/edison-79754","defaultUrl":"https://edison-79754.web.app","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","type":"DEFAULT_SITE"}]}
+[debug] [2024-11-11T18:26:44.390Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:44.390Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:44.391Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config [none]
+[debug] [2024-11-11T18:26:44.987Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config 200
+[debug] [2024-11-11T18:26:44.987Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config {"projectId":"edison-79754","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","storageBucket":"edison-79754.firebasestorage.app","apiKey":"AIzaSyDsPwiFrm5gKZ_cOtT84HGdIQVlzGFt2JI","authDomain":"edison-79754.firebaseapp.com","messagingSenderId":"1097612680420","measurementId":"G-9G78Z1961S"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-11-11T18:26:48.576Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:48.577Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:26:48.577Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:26:48.700Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:26:48.700Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:26:42.354685951Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:26:42.354685951Z"}
+[info]    ▲ Next.js 15.0.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/7) ...
+
+[info]    Generating static pages (1/7) 
+
+[info]    Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ✓ Generating static pages (7/7)
+
+[info]    Finalizing page optimization ...
+   Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    52.6 kB         162 kB
+├ ○ /_not-found                          896 B           101 kB
+├ ○ /contact                             2.13 kB         149 kB
+├ ○ /projects                            58.4 kB         310 kB
+└ ƒ /projects/[slug]                     9.57 kB         224 kB
++ First Load JS shared by all            100 kB
+  ├ chunks/4bd1b696-ad6602fa076d2dfd.js  52.5 kB
+  ├ chunks/517-e1850d56ad22dc71.js       45.5 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+
+[info] ○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • non-static component /projects/[slug]/page
+[info] 
+[debug] [2024-11-11T18:27:12.575Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:27:12.575Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:27:12.575Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:27:13.002Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:27:13.002Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:26:42.354685951Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:26:42.354685951Z"}
+[debug] [2024-11-11T18:27:18.822Z] Error: Command failed: npm i --omit dev --no-audit
+    at genericNodeError (node:internal/errors:984:15)
+    at wrappedFn (node:internal/errors:538:14)
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/frameworks/index.js:371:42)
+    at async deploy (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/deploy/index.js:58:13)
+    at async Command.hostingChannelDeployAction [as actionFn] (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/commands/hosting-channel-deploy.js:90:25)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-11-11T18:29:09.314Z] ----------------------------------------------------------------------
+[debug] [2024-11-11T18:29:09.316Z] Command:       /home/edison/node-v20.16.0/bin/node /home/edison/node-v20.16.0/bin/firebase hosting:channel:deploy demo
+[debug] [2024-11-11T18:29:09.317Z] CLI Version:   13.24.2
+[debug] [2024-11-11T18:29:09.317Z] Platform:      linux
+[debug] [2024-11-11T18:29:09.317Z] Node Version:  v20.16.0
+[debug] [2024-11-11T18:29:09.317Z] Time:          Mon Nov 11 2024 13:29:09 GMT-0500 (hora estándar de Colombia)
+[debug] [2024-11-11T18:29:09.317Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-11T18:29:09.385Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-11T18:29:09.385Z] > authorizing via signed-in user (edisonisaza@gmail.com)
+[debug] [2024-11-11T18:29:09.385Z] [iam] checking project edison-79754 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-11-11T18:29:09.387Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:09.387Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:09.388Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions [none]
+[debug] [2024-11-11T18:29:09.388Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions x-goog-quota-user=projects/edison-79754
+[debug] [2024-11-11T18:29:09.388Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:29:09.923Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions 200
+[debug] [2024-11-11T18:29:09.924Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/edison-79754:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-11-11T18:29:09.924Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:09.925Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:09.925Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 [none]
+[debug] [2024-11-11T18:29:10.479Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 200
+[debug] [2024-11-11T18:29:10.480Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/edison-79754 {"projectId":"edison-79754","projectNumber":"1097612680420","displayName":"edison","name":"projects/edison-79754","resources":{"hostingSite":"edison-79754"},"state":"ACTIVE","etag":"1_9a65506b-7595-4ec2-bc18-3824f24f6f67"}
+[debug] [2024-11-11T18:29:10.483Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:10.483Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:10.484Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:29:11.056Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:29:11.056Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:26:42.354685951Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:26:42.354685951Z"}
+[debug] [2024-11-11T18:29:11.057Z] [hosting] found existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:26:42.354685951Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:26:42.354685951Z"}
+[debug] [2024-11-11T18:29:11.058Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:11.058Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:11.059Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo updateMask=ttl
+[debug] [2024-11-11T18:29:11.060Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"ttl":"604800s"}
+[debug] [2024-11-11T18:29:11.321Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:29:11.321Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"},"glob":"/favicon.ico"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:29:11.183779910Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:29:11.183779910Z"}
+[debug] [2024-11-11T18:29:11.321Z] [hosting] updated TTL for existing channel for site edison-79754 {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"},"glob":"/favicon.ico"},{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:29:11.183779910Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:29:11.183779910Z"}
+[debug] [2024-11-11T18:29:13.042Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:13.043Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:13.043Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites pageToken=&pageSize=10
+[debug] [2024-11-11T18:29:13.344Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites 200
+[debug] [2024-11-11T18:29:13.344Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites {"sites":[{"name":"projects/edison-79754/sites/edison-79754","defaultUrl":"https://edison-79754.web.app","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","type":"DEFAULT_SITE"}]}
+[debug] [2024-11-11T18:29:13.346Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:13.346Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:13.347Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config [none]
+[debug] [2024-11-11T18:29:13.856Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config 200
+[debug] [2024-11-11T18:29:13.856Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:1097612680420:web:f6102cab1e1ee177a5e0f1/config {"projectId":"edison-79754","appId":"1:1097612680420:web:f6102cab1e1ee177a5e0f1","storageBucket":"edison-79754.firebasestorage.app","apiKey":"AIzaSyDsPwiFrm5gKZ_cOtT84HGdIQVlzGFt2JI","authDomain":"edison-79754.firebaseapp.com","messagingSenderId":"1097612680420","measurementId":"G-9G78Z1961S"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-11-11T18:29:17.372Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:17.372Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:17.373Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:29:17.565Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:29:17.566Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294"},"glob":"/_not-found"},{"headers":{"content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico","cache-control":"public, max-age=0, must-revalidate"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"deployment-tool":"cli-firebase","firebase-web-framework":"next"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:29:11.183779910Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:29:11.183779910Z"}
+[info]    ▲ Next.js 15.0.3
+
+[info]    - Environments: .env.local
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info]    Collecting page data ...
+
+[info]    Generating static pages (0/7) ...
+
+[info]    Generating static pages (1/7) 
+
+[info]    Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ✓ Generating static pages (7/7)
+
+[info]    Finalizing page optimization ...
+   Collecting build traces ...
+
+[info] 
+
+[info] Route (app)                              Size     First Load JS
+┌ ○ /                                    52.6 kB         162 kB
+├ ○ /_not-found                          896 B           101 kB
+├ ○ /contact                             2.13 kB         149 kB
+├ ○ /projects                            58.4 kB         310 kB
+└ ƒ /projects/[slug]                     9.57 kB         224 kB
++ First Load JS shared by all            100 kB
+  ├ chunks/4bd1b696-ad6602fa076d2dfd.js  52.5 kB
+  ├ chunks/517-e1850d56ad22dc71.js       45.5 kB
+  └ other shared chunks (total)          1.92 kB
+
+
+
+[info] ○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+[info] Building a Cloud Function to run this application. This is needed due to:
+[info]  • non-static component /projects/[slug]/page
+[info] 
+[debug] [2024-11-11T18:29:41.456Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:41.457Z] Checked if tokens are valid: true, expires at: 1731352605658
+[debug] [2024-11-11T18:29:41.457Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo [none]
+[debug] [2024-11-11T18:29:41.919Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo 200
+[debug] [2024-11-11T18:29:41.920Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/edison-79754/sites/edison-79754/channels/demo {"name":"projects/edison-79754/sites/edison-79754/channels/demo","url":"https://edison-79754--demo-w4v892to.web.app","release":{"name":"projects/edison-79754/sites/edison-79754/channels/demo/releases/1731294688810000","version":{"name":"projects/edison-79754/sites/edison-79754/versions/373584442995b013","status":"FINALIZED","config":{"headers":[{"headers":{"x-next-cache-tags":"_N_T_/layout,_N_T_/_not-found/layout,_N_T_/_not-found/page,_N_T_/_not-found","x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1"},"glob":"/_not-found"},{"headers":{"cache-control":"public, max-age=0, must-revalidate","content-type":"image/x-icon","x-next-cache-tags":"_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"},"glob":"/favicon.ico"},{"headers":{"x-nextjs-stale-time":"4294967294","x-nextjs-prerender":"1","x-next-cache-tags":"_N_T_/layout,_N_T_/contact/layout,_N_T_/contact/page,_N_T_/contact"},"glob":"/contact"},{"headers":{"Set-Cookie":"__FIREBASE_DEFAULTS__=eyJjb25maWciOnsicHJvamVjdElkIjoiZWRpc29uLTc5NzU0IiwiYXBwSWQiOiIxOjEwOTc2MTI2ODA0MjA6d2ViOmY2MTAyY2FiMWUxZWUxNzdhNWUwZjEiLCJzdG9yYWdlQnVja2V0IjoiZWRpc29uLTc5NzU0LmZpcmViYXNlc3RvcmFnZS5hcHAiLCJhcGlLZXkiOiJBSXphU3lEc1B3aUZybTVnS1pfY090VDg0SEdkSVFWbHpHRnQySkkiLCJhdXRoRG9tYWluIjoiZWRpc29uLTc5NzU0LmZpcmViYXNlYXBwLmNvbSIsIm1lc3NhZ2luZ1NlbmRlcklkIjoiMTA5NzYxMjY4MDQyMCIsIm1lYXN1cmVtZW50SWQiOiJHLTlHNzhaMTk2MVMifX0; SameSite=Strict; Expires=2026-10-06T13:51:26.458Z; Path=/;"},"glob":"/**/*.[jt]s"}],"cleanUrls":true,"trailingSlashBehavior":"REMOVE"},"labels":{"firebase-web-framework":"next","deployment-tool":"cli-firebase"},"createTime":"2024-11-11T03:11:26.847963Z","createUser":{"email":"edisonisaza@gmail.com"},"finalizeTime":"2024-11-11T03:11:29.148404Z","finalizeUser":{"email":"edisonisaza@gmail.com"},"fileCount":"33","versionBytes":"1278389"},"type":"DEPLOY","releaseTime":"2024-11-11T03:11:28.810Z","releaseUser":{"email":"edisonisaza@gmail.com"}},"createTime":"2024-11-11T03:10:59.976742903Z","updateTime":"2024-11-11T18:29:11.183779910Z","retainedReleaseCount":10,"expireTime":"2024-11-18T18:29:11.183779910Z"}
+[debug] [2024-11-11T18:29:50.444Z] Error: Command failed: npm i --omit dev --no-audit
+    at genericNodeError (node:internal/errors:984:15)
+    at wrappedFn (node:internal/errors:538:14)
+    at checkExecSyncError (node:child_process:890:11)
+    at execSync (node:child_process:962:15)
+    at prepareFrameworks (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/frameworks/index.js:371:42)
+    at async deploy (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/deploy/index.js:58:13)
+    at async Command.hostingChannelDeployAction [as actionFn] (/home/edison/node-v20.16.0/lib/node_modules/firebase-tools/lib/commands/hosting-channel-deploy.js:90:25)
+[error] 
+[error] Error: An unexpected error has occurred.
