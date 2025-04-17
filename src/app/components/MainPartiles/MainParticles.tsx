@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import Particles from "@/app/componets/Particles/particles";
+import Particles from "@/app/components/Particles/particles";
 import ChatBotComponent from '../ChatBot/ChatBootComponent';
 
 export const MainParticles = () => {

@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
-import { NavHomePage } from '@/app/componets/NavHomePage/NavHomePage'
-import { MainParticles } from '@/app/componets/MainPartiles/MainParticles'
+import { NavHomePage } from '@/app/components/NavHomePage/NavHomePage'
+import { MainParticles } from '@/app/components/MainPartiles/MainParticles'
 
 export const HomePage = () => {
   return (

@@ -4,8 +4,8 @@ import { AiOutlineMail } from "react-icons/ai";
 
 import React from 'react'
 import Link from "next/link";
-import { Navigation } from "@/app/componets/Nav/nav";
-import { Card } from "@/app/componets/Card/card";
+import { Navigation } from "@/app/components/Nav/nav";
+import { Card } from "@/app/components/Card/card";
 
 
 const socials = [
