@@ -1,0 +1,182 @@
+.chatBotWrapper {
+    /* Estilos para el contenedor principal del chatbot */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .chatBotToggle {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    background-color: #0f0f0f; /* Color de fondo del botón */
+    color: #00ff00; /* Color del texto del botón */
+    border: none; /* Eliminar el borde del botón */
+    border-radius: 50%; /* Hacer el botón redondo */
+    cursor: pointer; /* Cambiar el cursor a un puntero al pasar el mouse */
+    display: flex; /* Habilitar el flexbox para centrar el icono */
+    justify-content: center; /* Centrar el icono horizontalmente */
+    align-items: center; /* Centrar el icono verticalmente */
+    box-shadow: 0 0 10px #00ff00; /* Agregar un efecto de sombra */
+  }
+  
+  .chatBotContainer {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    width: 350px;
+    display: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border-radius: 20px;
+    overflow: hidden;
+    border-color: #00ff00;
+    background-color: #1a1a1a; /* Color de fondo del contenedor */
+    box-shadow: 0 0 10px #00ff00; /* Agregar un efecto de sombra */
+  }
+  
+  .chatBotContainer.show {
+    display: block;
+  }
+  
+  .chatMessages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px; /* Agregar padding para el contenedor de mensajes */
+    background-color: #0000; /* Color de fondo del contenedor de mensajes */
+    color: #00ff00; /* Color del texto del contenedor de mensajes */
+  }
+  
+  .message {
+    margin-bottom: 10px;
+  }
+  
+  .messageUser {
+    text-align: right;
+  }
+  
+  .messageAssistant {
+    text-align: left;
+  }
+  
+  .cardHeader {
+    background-color: #0f0f0f !important;
+    color: #00ff00;
+    padding: 10px; /* Agregar padding para el encabezado */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .cardHeaderText {
+    margin: 0;
+  }
+  
+  .minimizeBtn {
+    padding: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0; /* Agregar esta línea */
+    color: #00ff00;
+    background-color: transparent; /* Eliminar el fondo del botón */
+    border: none; /* Eliminar el borde del botón */
+    cursor: pointer; /* Cambiar el cursor a un puntero al pasar el mouse */
+  }
+  
+  .minimizeBtn:hover svg {
+    color: #00ff00; /* Color azul claro al pasar el mouse */
+  }
+  
+  .buttonSend {
+    border-radius: 25px;
+    background-color: #0f0f0f; /* Color de fondo del botón */
+    color: #00ff00; /* Color del texto del botón */
+    border: none; /* Eliminar el borde del botón */
+    padding: 10px 20px; /* Agregar padding al botón */
+    cursor: pointer; /* Cambiar el cursor a un puntero al pasar el mouse */
+    box-shadow: 0 0 10px #00ff00; /* Agregar un efecto de sombra */
+  }
+  
+  .buttonSend:hover {
+    background-color: #0f0f0f; /* Color de fondo del botón al pasar el mouse */
+  }
+  
+  .cardBorder {
+    border: none;
+  }
+  
+  .messageAlert {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #282828; /* Color de fondo del contenedor del mensaje */
+    border: 1px solid #00ff00; /* Agregar borde al contenedor del mensaje */
+    color: #00ff00; /* Color del texto del contenedor del mensaje */
+  }
+  
+  .messageUserAlert {
+    text-align: right;
+  }
+  
+  .messageAssistantAlert {
+    text-align: left;
+    background-color: #1a1a1a;
+    color: #00ff00; /* Color del texto del contenedor del mensaje */
+  }
+  
+  .messageSender {
+    font-weight: bold;
+  }
+  
+  .inputGroup {
+    display: flex;
+  }
+  
+  .inputField {
+    flex-grow: 1;
+    min-height: 55px !important; /* Altura mínima igual a la del input original */
+    max-height: 150px !important; /* Altura máxima deseada */
+    resize: vertical;
+    overflow-y: auto;
+    margin-right: 5px;
+    border: 1px solid #00ff00 !important; /* Agregar borde al campo de entrada */
+    padding: 10px; /* Agregar padding al campo de entrada */
+    background-color: #1a1a1a; /* Color de fondo del campo de entrada */
+    color: #00ff00; /* Color del texto del campo de entrada */
+  }
+  
+  .inputField:focus {
+    outline: 2px solid #00cc00 !important; /* Un verde más fuerte para el contorno al hacer clic */
+  }
+  
+  .inputField::placeholder {
+    color: #00ff00; /* Verde para el texto del placeholder */
+  }
+  
+  .inputField::-webkit-scrollbar {
+    display: none; /* Oculta la barra de desplazamiento en Chrome, Safari y Opera */
+  }
+  
+  .cardFooter {
+    padding: 10px; /* Agregar padding al pie de página */
+    background-color: #1a1a1a; /* Color de fondo del pie de página */
+    color: #00ff00; /* Color del texto del pie de página */
+  }
+  
+  .dNone {
+    display: none;
+  }
+  .chatMessages::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+    background-color: #1a1a1a; /* Color de fondo de la barra */
+  }
+  
+  .chatMessages::-webkit-scrollbar-thumb {
+    background-color: #00ff00; /* Color del pulgar de la barra (verde neón) */
+    border-radius: 4px; /* Bordes redondeados */
+    box-shadow: inset 0 0 5px rgba(0, 255, 0, 0.5); /* Sombra interior para un efecto brillante */
+  }
+  
+  .chatMessages::-webkit-scrollbar-thumb:hover {
+    background-color: #00cc00; /* Color del pulgar al pasar el mouse (verde más oscuro) */
+  }
