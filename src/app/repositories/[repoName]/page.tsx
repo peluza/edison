@@ -1,9 +1,7 @@
 // src/app/repositories/[repoName]/page.tsx
-import { notFound } from 'next/navigation'; // notFound puede que ya no sea necesario aquí directamente
-// Importa el nuevo componente de detalles
 import RepositoryDetails from '@/app/components/Repositories/RepositoryDetails';
-// Solo necesitamos getPublicRepositories para generateStaticParams
 import { getPublicRepositories } from '@/app/utils/github';
+import type { Metadata } from 'next';
 
 interface RepositoryPageProps {
   params: {
@@ -11,29 +9,47 @@ interface RepositoryPageProps {
   };
 }
 
-// generateStaticParams se mantiene igual aquí
-export async function generateStaticParams() {
-  const repositories = await getPublicRepositories();
-  console.log('--- generateStaticParams Results ---:', repositories.map(repo => ({ repoName: repo.name })));
-  return repositories.map((repo) => ({
-    repoName: repo.name,
-  }));
-}
-
-// generateMetadata se mantiene igual aquí (o puedes buscar el repo específico si necesitas más datos)
-export async function generateMetadata({ params }: RepositoryPageProps) {
-   // Aquí podrías llamar a una función `getRepositoryDetails(params.repoName)` si la tuvieras
-   // para obtener más información si fuera necesario para los metadatos.
-   // Por ahora, usamos solo el nombre.
+// --- generateMetadata (asumimos que está bien o simplificado) ---
+export async function generateMetadata({ params }: RepositoryPageProps): Promise<Metadata> {
+  if (!params || typeof params.repoName !== 'string') {
+    return { title: "Error" };
+  }
   return {
-    title: `Repositorio: ${params.repoName}`, // Usamos el nombre del repo para el título
+    title: `Repositorio: ${params.repoName}`,
   };
 }
 
-// El componente de página ahora es más simple
-export default async function RepositoryPage({ params }: RepositoryPageProps) {
-  // Renderiza el componente RepositoryDetails, pasando el nombre del repositorio
+// --- generateStaticParams (asumimos que está bien) ---
+export async function generateStaticParams() {
+  // ... tu lógica para obtener los repoNames ...
+  try {
+    const repositories = await getPublicRepositories();
+    return repositories.map((repo) => ({
+      repoName: repo.name,
+    }));
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
+}
+
+// --- Componente de la Página ---
+export default function RepositoryPage({ params }: RepositoryPageProps) {
+  if (!params || typeof params.repoName !== 'string') {
+    console.error("RepositoryPage - Invalid params received:", params);
+    return (
+      <div className="text-red-500 p-10">
+        Error: No se pudo cargar el nombre del repositorio.
+      </div>
+    );
+  }
+  const repoName = params.repoName;
+
   return (
-    <RepositoryDetails repoName={params.repoName} />
+    // *** 1. El Layout va AQUÍ, envolviendo RepositoryDetails ***
+    <div className="relative pb-16 bg-gradient-to-tl from-black via-zinc-600/20 to-black min-h-screen text-white">
+       {/* NO hay padding aquí, se manejará dentro de RepositoryDetails o su contenido */}
+          <RepositoryDetails repoName={repoName} />
+    </div>
   );
 }

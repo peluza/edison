@@ -1,7 +1,7 @@
 "use client"
 import React, { useRef, useEffect } from 'react';
 import { useMousePosition } from "@/app/utils/mouse";
-import styles from '@/app/componets/Particles/particles.module.css';
+import styles from '@/app/components/Particles/particles.module.css';
 
 interface ShellCodeRainProps {
   className?: string;

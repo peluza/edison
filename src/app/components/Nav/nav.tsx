@@ -25,13 +25,13 @@ export const Navigation: React.FC = () => {
                 className={`fixed inset-x-0 top-0 z-50 backdrop-blur  duration-200 border-b  ${
                     isIntersecting
                         ? "bg-zinc-900/0 border-transparent"
-                        : "bg-zinc-900/500  border-zinc-800 " // Posible typo en /500, quizás debería ser /50?
+                        : "bg-zinc-900/500  border-zinc-800 "
                 }`}
             >
                 <div className="container flex flex-row-reverse items-center justify-between p-6 mx-auto">
                     <div className="flex justify-between gap-8">
                         <Link
-                            href="/projects"
+                            href="/repositories"
                             className="duration-200 text-green-400 hover:text-green-300"
                         >
                             Projects
