@@ -6,7 +6,7 @@ import ChatBotComponent from '../ChatBot/ChatBootComponent';
 export const MainParticles = () => {
   return (
     <main className='flex flex-col items-center justify-center w-full h-full overflow-hidden'>
-      <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-green-400/0 via-green-400/50 to-green-400/0" />
+      <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-green-400/0" />
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={100}
@@ -16,7 +16,7 @@ export const MainParticles = () => {
         EDISON
       </h1>
 
-      <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-green-400/0 via-green-400/50 to-green-400/0" />
+      <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-green-400/0" />
       <div className="my-16 text-center animate-fade-in">
         <h2 className="text-sm text-white ">
           I am a full stack software developer, with knowledge of ethical hacking
