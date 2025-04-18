@@ -28,10 +28,10 @@ export default async function RepositoriesList() {
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h1 className="text-3xl font-bold tracking-tight text-green-400 sm:text-4xl">
-            Mis Repositorios Públicos
+          My Public Repositories
           </h1>
           <p className="mt-4 text-green-300">
-            Explorando proyectos y código fuente en GitHub.
+          Exploring projects and source code on GitHub.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />

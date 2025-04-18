@@ -41,7 +41,7 @@ export default async function RepositoryDetails({ repoName }: RepositoryDetailsP
             <header className="relative py-16 sm:py-24 px-6 lg:px-8 text-center flex flex-col items-center">
                  <div className="w-full flex mb-8 max-w-4xl">
                     {/* Contenedor para iconos de GitHub, Estrellas y Vistas */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 mt-5">
                         {repoDetails.html_url && (
                              <a
                                 href={repoDetails.html_url}
