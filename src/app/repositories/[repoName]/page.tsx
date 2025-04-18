@@ -1,3 +1,4 @@
+import { Navigation } from '@/app/components/Navigation/Navigation';
 import RepositoryDetails from '@/app/components/Repositories/RepositoryDetails';
 import { getPublicRepositories } from '@/app/utils/github';
 import type { Metadata } from 'next';
@@ -86,6 +87,7 @@ export default async function RepositoryPage({ params: paramsPromise }: Reposito
 
     return (
       <div className="relative pb-16 bg-gradient-to-tl from-black via-zinc-600/20 to-black min-h-screen text-white">
+        < Navigation />
         <RepositoryDetails repoName={repoName} />
       </div>
     );

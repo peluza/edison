@@ -39,15 +39,7 @@ export default async function RepositoryDetails({ repoName }: RepositoryDetailsP
         <div className="container mx-auto relative overflow-hidden">
             {/* --- Header --- */}
             <header className="relative py-16 sm:py-24 px-6 lg:px-8 text-center flex flex-col items-center">
-                 <div className="w-full flex justify-between items-center mb-8 max-w-4xl">
-                    <Link
-                        href="/repositories"
-                        className="duration-200 hover:font-medium text-green-400 hover:text-green-300 flex items-center gap-1"
-                        title="Volver a la lista"
-                    >
-                        <FaArrowLeft className="w-5 h-5" />
-                        Volver
-                    </Link>
+                 <div className="w-full flex mb-8 max-w-4xl">
                     {/* Contenedor para iconos de GitHub, Estrellas y Vistas */}
                     <div className="flex items-center gap-4">
                         {repoDetails.html_url && (

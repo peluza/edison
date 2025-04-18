@@ -4,7 +4,7 @@ import { AiOutlineMail } from "react-icons/ai";
 
 import React from 'react'
 import Link from "next/link";
-import { Navigation } from "@/app/components/Nav/nav";
+import { Navigation } from "@/app/components/Navigation/Navigation";
 import { Card } from "@/app/components/Card/card";
 
 
