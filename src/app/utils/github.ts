@@ -19,32 +19,70 @@ interface GitHubRepository {
   // Puedes añadir más campos si los necesitas (forks_count, open_issues_count, etc.)
 }
 
-// (La interfaz GitHubReadme no es necesaria para getRepositoryByName, pero sí para getReadmeContent)
-// interface GitHubReadme { ... }
-
 // --- Headers Comunes ---
-const commonHeaders: HeadersInit = { // Especificamos el tipo HeadersInit
+const commonHeaders: HeadersInit = {
   Accept: 'application/vnd.github.v3+json',
   'X-GitHub-Api-Version': '2022-11-28',
 };
-// Añadimos Authorization solo si GITHUB_TOKEN existe
 if (GITHUB_TOKEN) {
   commonHeaders['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
 } else {
-  // Advertimos solo una vez si falta el token
   console.warn('Missing GITHUB_TOKEN environment variable. GitHub API rate limits will be lower.');
 }
 
+// --- Función para obtener el contenido del README (sin cambios) ---
+export const getReadmeContent = cache(async (repoName: string): Promise<string | null> => {
+    if (!REPO_OWNER || !repoName) {
+        console.error('Missing REPO_OWNER or repoName for getReadmeContent');
+        return null;
+    }
 
-// --- Función para obtener TODOS los repositorios públicos ---
+    const url = `${GITHUB_API_BASE_URL}/repos/${REPO_OWNER}/${repoName}/readme`;
+    // Quitamos el log de fetching para no llenar la consola en el bucle
+    // console.log(`Workspaceing README from: ${url}`);
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                ...commonHeaders,
+                Accept: 'application/vnd.github.raw+json',
+            },
+            next: { revalidate: 3600 }
+        });
+
+        if (response.ok) {
+            const content = await response.text();
+            // console.log(`Successfully fetched README content for: ${repoName}`);
+            return content;
+        } else if (response.status === 404) {
+            // console.log(`No README file found for repository: ${repoName}`);
+            return null;
+        } else {
+            // No lanzamos error aquí, simplemente logueamos y retornamos null
+            // para que el filtro pueda manejarlo
+            console.error(`Failed to fetch README for ${repoName}: ${response.status} ${response.statusText}`);
+            // throw new Error(`Failed to fetch README for ${repoName}: ${response.status} ${response.statusText}`);
+            return null; // Indica fallo o ausencia de README
+        }
+
+    } catch (error) {
+        console.error(`Error fetching README for ${repoName} from GitHub:`, error);
+        return null; // Error al obtener README
+    }
+});
+
+
+// --- Función MODIFICADA para obtener y FILTRAR repositorios públicos ---
 export const getPublicRepositories = cache(async (): Promise<GitHubRepository[]> => {
   if (!REPO_OWNER) {
     console.error('Missing GITHUB_REPO_OWNER environment variable');
     return [];
   }
 
-  const url = `${GITHUB_API_BASE_URL}/users/${REPO_OWNER}/repos?type=public&sort=updated&per_page=100`;
-  console.log(`Fetching public repos from: ${url}`);
+  const url = `${GITHUB_API_BASE_URL}/users/${REPO_OWNER}/repos?type=public&sort=updated&per_page=100`; // Considera paginación si tienes más de 100
+  console.log(`Workspaceing public repos list from: ${url}`);
+
+  let initialRepos: GitHubRepository[] = [];
 
   try {
     const response = await fetch(url, {
@@ -56,17 +94,54 @@ export const getPublicRepositories = cache(async (): Promise<GitHubRepository[]>
       throw new Error(`Failed to fetch repository list: ${response.status} ${response.statusText}`);
     }
 
-    const repos = (await response.json()) as GitHubRepository[];
-    console.log(`Fetched ${repos.length} public repositories.`);
-    return repos;
+    initialRepos = (await response.json()) as GitHubRepository[];
+    console.log(`Workspaceed ${initialRepos.length} initial public repositories.`);
 
   } catch (error) {
-    console.error('Error fetching repository list from GitHub:', error);
-    return []; // Devuelve array vacío en caso de error
+    console.error('Error fetching initial repository list from GitHub:', error);
+    return []; // Devuelve array vacío en caso de error inicial
   }
+
+  // --- Inicio del Filtrado ---
+  console.log('Filtering repositories based on README content and length...');
+
+  // 1. Crear promesas para obtener el README de cada repositorio
+  //    Usamos Promise.all para ejecutarlas en paralelo (más rápido)
+  const readmeCheckPromises = initialRepos.map(async (repo) => {
+    const readmeContent = await getReadmeContent(repo.name); // Usa la función de caché
+    return {
+      repo, // Mantenemos la información original del repo
+      hasValidReadme: readmeContent !== null && readmeContent.length >= 100 // Condición de filtro
+    };
+  });
+
+  // 2. Esperar a que todas las promesas de verificación de README se completen
+  let reposWithReadmeStatus: Array<{ repo: GitHubRepository; hasValidReadme: boolean }> = [];
+  try {
+    reposWithReadmeStatus = await Promise.all(readmeCheckPromises);
+  } catch (error) {
+      // Aunque getReadmeContent maneja errores, Promise.all podría fallar por otras razones
+      console.error("Error during parallel README fetching:", error);
+      // Podrías decidir devolver la lista sin filtrar o una lista vacía
+      // return initialRepos; // Opción: devolver sin filtrar si algo falla
+      return []; // Opción: devolver vacío
+  }
+
+
+  // 3. Filtrar la lista basada en el resultado de la verificación del README
+  const filteredRepos = reposWithReadmeStatus
+    .filter(item => item.hasValidReadme) // Quédate solo con los que tienen README válido
+    .map(item => item.repo); // Extrae solo la información del repositorio
+
+  console.log(`Finished filtering. Kept ${filteredRepos.length} out of ${initialRepos.length} repositories.`);
+
+  return filteredRepos;
+  // --- Fin del Filtrado ---
+
 });
 
-// --- *** NUEVA FUNCIÓN para obtener detalles de UN repositorio por nombre *** ---
+
+// --- Función para obtener detalles de UN repositorio por nombre (sin cambios) ---
 export const getRepositoryByName = cache(async (repoName: string): Promise<GitHubRepository | null> => {
   if (!REPO_OWNER) {
     console.error('Missing GITHUB_REPO_OWNER environment variable');
@@ -78,12 +153,12 @@ export const getRepositoryByName = cache(async (repoName: string): Promise<GitHu
   }
 
   const url = `${GITHUB_API_BASE_URL}/repos/${REPO_OWNER}/${repoName}`;
-  console.log(`Fetching repository details from: ${url}`);
+  console.log(`Workspaceing repository details from: ${url}`);
 
   try {
     const response = await fetch(url, {
       headers: commonHeaders,
-      next: { revalidate: 3600 } // Revalidar cada hora
+      next: { revalidate: 3600 }
     });
 
     if (response.ok) {
@@ -92,53 +167,12 @@ export const getRepositoryByName = cache(async (repoName: string): Promise<GitHu
       return repoDetails;
     } else if (response.status === 404) {
       console.warn(`Repository not found: ${REPO_OWNER}/${repoName}`);
-      // Podrías lanzar notFound() aquí si quieres que la página devuelva un 404
-      // notFound();
-      return null; // O devolver null para que el componente decida qué hacer
+      return null;
     } else {
-      // Otro tipo de error (rate limit, error del servidor, etc.)
       throw new Error(`Failed to fetch repository details for ${repoName}: ${response.status} ${response.statusText}`);
     }
   } catch (error) {
     console.error(`Error fetching details for ${repoName} from GitHub:`, error);
-    return null; // Devuelve null en caso de error
+    return null;
   }
-});
-
-
-// --- Función para obtener el contenido del README ---
-export const getReadmeContent = cache(async (repoName: string): Promise<string | null> => {
-    if (!REPO_OWNER || !repoName) {
-        console.error('Missing REPO_OWNER or repoName for getReadmeContent');
-        return null;
-    }
-
-    const url = `${GITHUB_API_BASE_URL}/repos/${REPO_OWNER}/${repoName}/readme`;
-    console.log(`Fetching README from: ${url}`);
-
-    try {
-        // Usamos 'application/vnd.github.raw+json' para obtener el contenido directamente
-        const response = await fetch(url, {
-            headers: {
-                ...commonHeaders, // Incluye el token si existe
-                Accept: 'application/vnd.github.raw+json', // Pide el contenido raw
-            },
-            next: { revalidate: 3600 } // Revalidar cada hora
-        });
-
-        if (response.ok) {
-            const content = await response.text();
-            console.log(`Successfully fetched README content for: ${repoName}`);
-            return content; // Devuelve el contenido como texto plano
-        } else if (response.status === 404) {
-            console.log(`No README file found for repository: ${repoName}`);
-            return null; // No hay README
-        } else {
-            throw new Error(`Failed to fetch README for ${repoName}: ${response.status} ${response.statusText}`);
-        }
-
-    } catch (error) {
-        console.error(`Error fetching README for ${repoName} from GitHub:`, error);
-        return null; // Error al obtener README
-    }
 });

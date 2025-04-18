@@ -1,33 +1,85 @@
+// src/app/components/Repositories/RepositoryDetails.tsx
+
 import Link from 'next/link';
 import { getReadmeContent, getRepositoryByName } from '@/app/utils/github';
-import { getViews } from '@/app/utils/redis'; // Importar getViews
+import { getViews } from '@/app/utils/redis';
 import ReactMarkdown from 'react-markdown';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { FaArrowLeft, FaGithub, FaStar } from 'react-icons/fa';
+
+// Importa los componentes base de MDX
 import { customMdxComponents } from '@/app/components/Mdx/customComponents';
-import ViewCounter from './ViewCounter'; // Importa el componente cliente
+import ViewCounter from './ViewCounter';
+import React from 'react'; // Necesario para JSX y tipos
+import clsx from 'clsx'; // Asegúrate de tener clsx instalado (npm install clsx) o usa tu función helper
 
 // --- Componente Principal ---
 interface RepositoryDetailsProps {
     repoName: string;
 }
 
+const REPO_OWNER = process.env.GITHUB_REPO_OWNER;
+
 export default async function RepositoryDetails({ repoName }: RepositoryDetailsProps) {
-    // Obtener detalles, README y vistas iniciales en paralelo
+
     const [repoDetails, readmeContent, initialViews] = await Promise.all([
         getRepositoryByName(repoName),
         getReadmeContent(repoName),
-        getViews(repoName) // Obtener vistas iniciales desde Redis
+        getViews(repoName)
     ]);
 
-    // Opcional: Desconectar Redis
-    // await disconnectRedis();
+    
+    if (!REPO_OWNER) {
+        console.error("Error Crítico: La variable de entorno GITHUB_REPO_OWNER no está configurada en el servidor.");
+    
+        return (
+             <div className="container mx-auto px-6 py-12 text-center">
+                 <p className="text-red-500 font-bold">Error de Configuración del Servidor.</p>
+                 <p className="text-zinc-400 mt-2">Contacta al administrador.</p>
+             </div>
+         );
+    }
+
+    const ImageComponent = ({ className, alt, src, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => {
+        const defaultBranch = 'main';
+        let finalSrc = src;
+
+        if (typeof src === 'string' && REPO_OWNER && repoName && !src.startsWith('http://') && !src.startsWith('https://')) {
+            const baseUrl = `https://raw.githubusercontent.com/${REPO_OWNER}/${repoName}/${defaultBranch}/`;
+            try {
+                const relativePath = src.startsWith('/') ? src.substring(1) : src;
+                finalSrc = new URL(relativePath, baseUrl).href;
+            } catch (e) {
+                console.error(`Error constructing URL for relative image src "${src}"`, e);
+                finalSrc = '#error-constructing-image-url'; // URL de fallback en caso de error
+            }
+        }
+
+        const baseImageClasses = "rounded-md border border-zinc-700 my-4 max-w-full h-auto";
+
+        return (
+            <img
+                src={finalSrc} 
+                className={clsx(baseImageClasses, className)} 
+                alt={alt || ''} 
+                loading="lazy"
+                {...props}
+            />
+        );
+    };
+   
+
+    const componentsForRender = {
+        ...customMdxComponents, 
+        img: ImageComponent, 
+    };
 
     if (!repoDetails) {
         return (
              <div className="container mx-auto px-6 py-12 text-center">
                  <p className="text-red-500">Error: No se encontraron detalles para el repositorio "{repoName}".</p>
+                 <p className="text-zinc-400 mt-2">Verifica que el nombre sea correcto y que el repositorio exista.</p>
                  <Link href="/repositories" className="text-blue-400 hover:underline mt-4 inline-block">
                     <FaArrowLeft className="w-4 h-4 inline mr-1" /> Volver a la lista
                  </Link>
@@ -40,8 +92,8 @@ export default async function RepositoryDetails({ repoName }: RepositoryDetailsP
             {/* --- Header --- */}
             <header className="relative py-16 sm:py-24 px-6 lg:px-8 text-center flex flex-col items-center">
                  <div className="w-full flex mb-8 max-w-4xl">
-                    {/* Contenedor para iconos de GitHub, Estrellas y Vistas */}
-                    <div className="flex items-center gap-4 mt-5">
+                    {/* Contenedor para iconos y metadatos */}
+                    <div className="flex items-center gap-4 mt-5 text-sm">
                         {repoDetails.html_url && (
                              <a
                                 href={repoDetails.html_url}
@@ -51,11 +103,11 @@ export default async function RepositoryDetails({ repoName }: RepositoryDetailsP
                                 title="Ver en GitHub"
                             >
                                 <FaGithub className="w-5 h-5" />
-                                GitHub
+                                <span>GitHub</span> {/* Texto explícito */}
                              </a>
                         )}
                         {/* Estrellas */}
-                        <span className="inline-flex items-center gap-1 text-sm text-zinc-400">
+                        <span className="inline-flex items-center gap-1 text-zinc-400" title={`${repoDetails.stargazers_count} estrellas`}>
                            <FaStar className="w-4 h-4" />
                            {repoDetails.stargazers_count}
                         </span>
@@ -63,11 +115,12 @@ export default async function RepositoryDetails({ repoName }: RepositoryDetailsP
                         <ViewCounter
                             slug={repoName}
                             initialViews={initialViews}
-                            trackView={true} // Indica que este componente debe incrementar la vista
+                            trackView={true}
                         />
                         {/* ================================ */}
                     </div>
                  </div>
+                 {/* Título y Descripción */}
                  <div className="mx-auto max-w-2xl lg:mx-0">
                      <h1 className="text-green-400 text-4xl font-bold tracking-tight sm:text-5xl font-display">
                          {repoDetails.name}
@@ -90,16 +143,19 @@ export default async function RepositoryDetails({ repoName }: RepositoryDetailsP
                          rehypePlugins={[
                              rehypeSlug,
                              [rehypeAutolinkHeadings, {
-                                 behavior: 'prepend',
-                                 content: () => <span className="anchor-icon" aria-hidden="true">#</span>
+                                 behavior: 'prepend', // O 'append' si prefieres el # al final
+                                 properties: { className: ['anchor-link'] }, // Clase para estilizar el enlace del heading
+                                 content: () => <span className="anchor-icon" aria-hidden="true">#</span> // Contenido del enlace
                              }],
                          ]}
-                         components={customMdxComponents}
+                         // *** PASA LOS COMPONENTES PERSONALIZADOS AQUÍ ***
+                         components={componentsForRender}
                      >
                          {readmeContent}
                      </ReactMarkdown>
                  ) : (
-                     <p className="text-center text-zinc-400 mt-10">No se encontró un archivo README.md o hubo un error.</p>
+                     // Mensaje si no hay README o falla la carga
+                     <p className="text-center text-zinc-400 mt-10 italic">No se encontró un archivo README.md o hubo un error al cargarlo.</p>
                  )}
             </article>
         </div>
