@@ -4,9 +4,10 @@ import { getChat } from '@/app/utils/redis';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const chat = await getChat(params.id);
+    const { id } = await params;
+    const chat = await getChat(id);
     if (!chat) {
         return NextResponse.json({ error: 'Chat not found' }, { status: 404 });
     }
