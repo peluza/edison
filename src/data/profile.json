@@ -1,0 +1,72 @@
+{
+    "name": "Edison Isaza",
+    "role": "Senior Full Stack Developer & Data Specialist",
+    "bio": "Senior Developer based in Medellin, Colombia with over 17 years of experience. Currently driving development at GRUPO UNIÓN. Expert in System Integrations, Financial Algorithms, and AI Solutions. Passionate about building scalable, secure, and high-performance software architectures.",
+    "location": "Medellin, Colombia",
+    "contact": {
+        "email": "edisonisaza@gmail.com",
+        "whatsapp": "57 (322) 375-2131",
+        "linkedin": "https://www.linkedin.com/in/edison-isaza/"
+    },
+    "skills": [
+        "Software Architecture",
+        "System Integration",
+        "Microservices & APIs",
+        "Financial Algorithms & Trading Bots",
+        "Artificial Intelligence (LLMs, RAG, Agents)",
+        "Python (Pandas, NumPy, FastAPI)",
+        "JavaScript / TypeScript",
+        "React & Next.js Ecosystem",
+        "Node.js & Express",
+        "Mobile Development (React Native, Android)",
+        "DevOps & Containerization (Docker, Kubernetes)",
+        "Cloud Computing (AWS/GCP/Azure)",
+        "Cybersecurity Auditing & Pentesting",
+        "Database Management (SQL & NoSQL)",
+        "Blockchain & Crypto Technologies"
+    ],
+    "experience": [
+        {
+            "role": "Full Stack Developer",
+            "company": "GRUPO UNIÓN",
+            "dates": "Nov 2021 - Present",
+            "location": "Medellín, Antioquia, Colombia",
+            "description": "Leading full-stack development and system integration projects."
+        },
+        {
+            "role": "Data Engineer",
+            "company": "JONYCO LATAM",
+            "dates": "Feb 2025 - Apr 2025",
+            "location": "Bogotá / Remote",
+            "description": "Engineered data pipelines and processing solutions."
+        },
+        {
+            "role": "Full-stack Developer",
+            "company": "OCHOAS SERVICE",
+            "dates": "Jul 2024 - Apr 2025",
+            "location": "Quebec, Canada / Remote",
+            "description": "Developed web applications and services for remote clients."
+        },
+        {
+            "role": "Full-stack Developer",
+            "company": "ConsorcioTec™",
+            "dates": "Sept 2021 - Oct 2021",
+            "location": "Miami, FL / Remote",
+            "description": "Frontend and backend development for consortium technologies."
+        },
+        {
+            "role": "Full-stack Developer",
+            "company": "Alcaldía de Medellín",
+            "dates": "Mar 2021 - Sept 2021",
+            "location": "Medellín, Antioquia, Colombia",
+            "description": "Developed public sector software solutions for the city government."
+        }
+    ],
+    "services": [
+        "Custom Software Development (Web & Mobile)",
+        "AI & Chatbot Implementation (LLMs, RAG)",
+        "Financial Algorithm Design & Trading Bots",
+        "Cybersecurity Audits & Consulting",
+        "Cloud Infrastructure & DevOps"
+    ]
+}
