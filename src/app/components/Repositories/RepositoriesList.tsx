@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ViewCounter from './ViewCounter'; // Import ViewCounter
 import { getPublicRepositories } from '@/app/utils/github';
 import { getMultipleViews } from '@/app/utils/redis'; // Importa la función de Redis
 import { FaStar, FaEye } from 'react-icons/fa'; // Importa el ícono del ojo
@@ -28,10 +29,10 @@ export default async function RepositoriesList() {
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h1 className="text-3xl font-bold tracking-tight text-green-400 sm:text-4xl">
-          My Public Repositories
+            My Public Repositories
           </h1>
           <p className="mt-4 text-green-300">
-          Exploring projects and source code on GitHub.
+            Exploring projects and source code on GitHub.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />
@@ -80,12 +81,13 @@ export default async function RepositoriesList() {
                       <FaStar className="h-4 w-4 mr-1" />
                       {repo.stargazers_count}
                     </span>
-                    {/* Mostrar Vistas */}
-                    <span className="inline-flex items-center">
-                       <FaEye className="h-4 w-4 mr-1" />
-                       {/* Formatear número de vistas */}
-                       {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
-                    </span>
+                    {/* Use ViewCounter for live updates */}
+                    <ViewCounter
+                      slug={repo.name}
+                      initialViews={viewsData[repo.name] || 0}
+                      trackView={false}
+                      shouldFetch={true}
+                    />
                   </div>
                 </div>
               );

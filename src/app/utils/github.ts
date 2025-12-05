@@ -1,6 +1,7 @@
 // src/app/utils/github.ts
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
+import { getCachedData, cacheData } from '@/app/utils/redis';
 
 // --- Variables de Entorno y Constantes ---
 const GITHUB_API_BASE_URL = process.env.GITHUB_API_URL || 'https://api.github.com';
@@ -79,6 +80,14 @@ export const getPublicRepositories = cache(async (): Promise<GitHubRepository[]>
     return [];
   }
 
+  // 1. CHECK REDIS CACHE
+  const CACHE_KEY = 'github:repos:public';
+  const cachedRepos = await getCachedData(CACHE_KEY);
+  if (cachedRepos) {
+      console.log('Returning GitHub repositories from Redis Cache');
+      return cachedRepos;
+  }
+
   const url = `${GITHUB_API_BASE_URL}/users/${REPO_OWNER}/repos?type=public&sort=updated&per_page=100`; // Considera paginación si tienes más de 100
   console.log(`Workspaceing public repos list from: ${url}`);
 
@@ -135,6 +144,9 @@ export const getPublicRepositories = cache(async (): Promise<GitHubRepository[]>
 
   console.log(`Finished filtering. Kept ${filteredRepos.length} out of ${initialRepos.length} repositories.`);
 
+  // CACHE RESULT IN REDIS
+  await cacheData(CACHE_KEY, filteredRepos, 3600);
+
   return filteredRepos;
   // --- Fin del Filtrado ---
 
@@ -152,6 +164,14 @@ export const getRepositoryByName = cache(async (repoName: string): Promise<GitHu
     return null;
   }
 
+  // 1. CHECK REDIS CACHE
+  const CACHE_KEY = `github:repo:${repoName}`;
+  const cachedRepo = await getCachedData(CACHE_KEY);
+  if (cachedRepo) {
+      console.log(`Returning details for ${repoName} from Redis Cache`);
+      return cachedRepo;
+  }
+
   const url = `${GITHUB_API_BASE_URL}/repos/${REPO_OWNER}/${repoName}`;
   console.log(`Workspaceing repository details from: ${url}`);
 
@@ -164,6 +184,10 @@ export const getRepositoryByName = cache(async (repoName: string): Promise<GitHu
     if (response.ok) {
       const repoDetails = (await response.json()) as GitHubRepository;
       console.log(`Successfully fetched details for: ${repoName}`);
+      
+      // CACHE RESULT IN REDIS
+      await cacheData(CACHE_KEY, repoDetails, 3600);
+      
       return repoDetails;
     } else if (response.status === 404) {
       console.warn(`Repository not found: ${REPO_OWNER}/${repoName}`);

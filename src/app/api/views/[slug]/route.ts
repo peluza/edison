@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { incrementView } from '@/app/utils/redis';
+import { incrementView, getViews } from '@/app/utils/redis';
 
-// Quitamos el segundo argumento de la firma, ya no lo usaremos
+// Handler for POST requests (Increment view count)
 export async function POST(request: Request) {
   let slug: string | undefined;
 
@@ -29,11 +29,20 @@ export async function POST(request: Request) {
     // 5. Llama a la función de Redis
     const newViews = await incrementView(slug, uniqueId);
 
-    // 6. Devuelve la respuesta
+    // 6. Invalida la cache de Next.js para que la lista y el detalle se actualicen
+    try {
+        const { revalidatePath } = await import('next/cache');
+        revalidatePath('/repositories'); // Actualiza la lista principal
+        revalidatePath(`/repositories/${slug}`); // Actualiza la página de detalle actual
+    } catch (err) {
+        console.error('Error revalidating path:', err);
+    }
+
+    // 7. Devuelve la respuesta
     return NextResponse.json({ views: newViews });
 
   } catch (error: any) {
-    const errorSlug = slug || 'unknown'; // Usa el slug extraído en el log si es posible
+    const errorSlug = slug || 'unknown';
     if (error instanceof SyntaxError) {
         console.error(`API Error parsing JSON body for slug ${errorSlug}:`, error);
         return NextResponse.json({ message: 'Invalid JSON body' }, { status: 400 });
@@ -41,4 +50,22 @@ export async function POST(request: Request) {
     console.error(`API Error incrementing view for slug ${errorSlug}:`, error);
     return NextResponse.json({ message: 'Error incrementing view count' }, { status: 500 });
   }
+}
+
+// Handler for GET requests (Fetch view count)
+export async function GET(request: Request, context: { params: Promise<{ slug: string }> }) {
+    const resolvedParams = await context.params;
+    const slug = resolvedParams.slug;
+
+    if (!slug) {
+        return NextResponse.json({ message: 'Slug is required' }, { status: 400 });
+    }
+
+    try {
+        const views = await getViews(slug);
+        return NextResponse.json({ views });
+    } catch (error) {
+        console.error(`API Error getting views for slug ${slug}:`, error);
+        return NextResponse.json({ message: 'Error fetching view count' }, { status: 500 });
+    }
 }
