@@ -1,3 +1,7 @@
+// TRADUCCIÓN DESHABILITADA TEMPORALMENTE - Solo chatbot activo
+// import { ModelCoordinatorProvider } from "./components/ModelCoordinatorContext";
+// import { TranslationProvider } from "./components/Translation/TranslationProvider";
+// import LanguageSwitcher from "./components/Translation/LanguageSwitcher";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -26,12 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {/* TRADUCCIÓN DESHABILITADA - Solo chatbot por ahora */}
+        {/* <ModelCoordinatorProvider>
+          <TranslationProvider> */}
+        <div id="main-content">
+          {children}
+        </div>
         <ChatBotComponent />
+        {/* <LanguageSwitcher /> */}
+        {/* </TranslationProvider>
+        </ModelCoordinatorProvider> */}
         <SpeedInsights />
       </body>
     </html>
