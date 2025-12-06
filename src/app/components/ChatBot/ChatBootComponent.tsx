@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
-import { FaComment, FaMinus } from 'react-icons/fa';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { FaComment, FaMinus, FaTimes } from 'react-icons/fa';
 import { GoogleGenerativeAI, GenerateContentResult } from '@google/generative-ai';
 import styles from './ChatBotComponent.module.css';
 import ReactMarkdown from 'react-markdown';
@@ -16,28 +16,31 @@ interface InitialPromptMessage {
   text: string;
 }
 
-
-
 // --- Componente ---
 export default function ChatBotComponent() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [userInput, setUserInput] = useState('');
-  const chatContainerRef = useRef<HTMLDivElement>(null); // Tipado del ref
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const [initialPrompt, setInitialPrompt] = useState<InitialPromptMessage[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false); // Para indicar que está generando respuesta
+  // --- Hybrid State ---
+  const [backend, setBackend] = useState<'gemini' | 'local' | 'checking'>('checking');
+  const [localModelStatus, setLocalModelStatus] = useState<string>(''); // For loading progress text
 
-  // --- Inicialización del SDK de Gemini (como lo tenías) ---
+  // Refs for local model to avoid re-imports/re-loads
+  const localPipelineRef = useRef<any>(null);
+  const isPipelineLoadingRef = useRef(false);
+
+  // --- Inicialización del SDK de Gemini ---
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY as string;
   let genAI: GoogleGenerativeAI | null = null;
-  let model: any = null; // Tipo 'any' para flexibilidad o usar tipo específico del SDK
+  let geminiModel: any = null;
   try {
     if (apiKey) {
       genAI = new GoogleGenerativeAI(apiKey);
-      model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
-    } else {
-      console.warn("API Key for Gemini SDK is missing.");
+      geminiModel = genAI.getGenerativeModel({ model: "gemini-flash-lite-latest" });
     }
   } catch (error) {
     console.error("Error initializing Gemini SDK:", error);
@@ -48,40 +51,134 @@ export default function ChatBotComponent() {
     topP: 0.95,
     topK: 64,
     maxOutputTokens: 2048,
-    // responseMimeType: "text/plain", // No compatible con window.ai
   };
 
-  // --- Efecto para cargar el prompt inicial ---
+  // --- Initialize Local Model (Lazy -> Eager/Background) ---
+  const initLocalModel = useCallback(async () => {
+    if (localPipelineRef.current || isPipelineLoadingRef.current) return;
+
+    isPipelineLoadingRef.current = true;
+    setLocalModelStatus('Preparando modelo local en segundo plano...');
+
+    try {
+      // Dynamic import
+      const { AutoTokenizer, AutoModelForCausalLM, env } = await import('@huggingface/transformers');
+
+      // Configuration 
+      env.allowLocalModels = false;
+      env.useBrowserCache = true; // Ensures caching
+
+      const hfToken = process.env.NEXT_PUBLIC_HF_TOKEN;
+      if (hfToken) {
+        // @ts-ignore
+        env.token = hfToken;
+      }
+
+      // SWITCH: Using the GQA version which is often better optimized for transformers.js
+      const modelId = 'onnx-community/gemma-3-1b-it-ONNX-GQA';
+
+      // Load tokenizer 
+      const tokenizer = await AutoTokenizer.from_pretrained(modelId, {
+        // @ts-ignore
+        token: hfToken,
+      });
+
+      // Load model 
+      // NOTE: We strictly request 'q4' to avoid downloading the full 4GB+ fp32 model which crashes 
+      // the browser with OOM (3304506200 bytes error).
+      const model = await AutoModelForCausalLM.from_pretrained(modelId, {
+        device: 'webgpu',
+        dtype: 'q4', // STRICTLY use q4
+        // @ts-ignore
+        token: hfToken,
+        use_auth_token: hfToken,
+        progress_callback: (data: any) => {
+          if (data.status === 'progress') {
+            const percent = Math.round(data.progress || 0);
+            setLocalModelStatus(prev => `Descargando (GQA q4): ${percent}%`);
+          } else if (data.status === 'done') {
+            setLocalModelStatus('Modelo listo.');
+          }
+        }
+      });
+
+      setLocalModelStatus('Modelo local listo para usar.');
+
+      // Wrap in a simple "pipeline-like" closure for the rest of the code to use
+      localPipelineRef.current = async (prompt: string, options: any) => {
+        const inputs = tokenizer(prompt, { return_tensors: 'pt', return_token_type_ids: false });
+
+        const outputs = await model.generate({
+          ...inputs,
+          max_new_tokens: options.max_new_tokens || 256,
+          temperature: options.temperature || 0.1,
+          do_sample: options.do_sample || false,
+        });
+
+        const decoded = tokenizer.batch_decode(outputs as any, { skip_special_tokens: true })[0];
+        return [{ generated_text: decoded }];
+      };
+
+      console.log("Local model initialized successfully via background loader");
+      // Don't clear status immediately so user sees "Ready" if they open chat
+      setTimeout(() => setLocalModelStatus(''), 3000);
+
+    } catch (error) {
+      console.error("Failed to load local model:", error);
+      setLocalModelStatus(`Error descarga segundo plano (${error}).`);
+      setBackend('gemini');
+    } finally {
+      isPipelineLoadingRef.current = false;
+    }
+  }, []);
+
+  // --- RAM Check & Context Load ---
   useEffect(() => {
-    // MODIFICADO: Fetch del nuevo endpoint de contexto
+    // 1. Load Context
     fetch('/api/agent-context')
       .then(response => response.json())
       .then(data => {
         if (data.systemInstruction) {
-          // Guardamos la instrucción como un mensaje de sistema "falso" o en un estado separado
-          // Para compatibilidad con la estructura anterior, lo guardamos como un array de un solo elemento
           setInitialPrompt([{ text: data.systemInstruction }]);
           console.log("Contexto del agente cargado correctamente.");
-        } else {
-          console.error("La respuesta de /api/agent-context no tiene systemInstruction:", data);
         }
       })
       .catch(error => {
         console.error('Error al cargar el contexto del agente:', error);
-        // Fallback al archivo estático antiguo si falla la API
         fetch('/system_prompt.json')
           .then(res => res.json())
           .then(data => setInitialPrompt(data))
           .catch(err => console.error("Fallo también el fallback:", err));
       });
-  }, []); // Ejecutar solo una vez al montar
+
+    // 2. Check RAM
+    const checkRAM = async () => {
+      // @ts-ignore - navigator.deviceMemory is experimental
+      const ram = (navigator as any).deviceMemory || 0;
+      console.log(`Detected RAM: ${ram} GB`);
+
+      // USER REQUEST: Gemma 3 1B fits in ~1GB.
+      if (ram >= 1) {
+        setBackend('local');
+        console.log("RAM >= 1GB detected. Suitable for Gemma 3 1B. Switching to Local Model.");
+        // OPTIMIZATION: Start downloading immediately in background
+        initLocalModel();
+      } else {
+        setBackend('gemini');
+        console.log("Insufficient RAM (<1GB). Using Gemini API.");
+      }
+    };
+
+    checkRAM();
+  }, [initLocalModel]);
+
 
   // --- Efecto para ajustar altura del textarea ---
   useEffect(() => {
     const inputField = document.querySelector(`.${styles.inputField}`) as HTMLElement;
     if (inputField) {
       inputField.style.height = 'auto';
-      inputField.style.height = `${Math.min(inputField.scrollHeight, 150)}px`; // Limitar altura máxima
+      inputField.style.height = `${Math.min(inputField.scrollHeight, 150)}px`;
     }
   }, [userInput]);
 
@@ -90,104 +187,124 @@ export default function ChatBotComponent() {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [messages]);
-
+  }, [messages, localModelStatus]);
 
   const handleOpenChat = () => setIsOpen(!isOpen);
 
   // --- Función para enviar mensajes ---
   const handleSendMessage = async () => {
-    if (userInput.trim() === '' || isLoading) return; // Evitar envíos múltiples o vacíos
+    if (userInput.trim() === '' || isLoading) return;
     if (initialPrompt.length === 0) {
-      console.error("Prompt inicial no cargado.");
       setMessages(prev => [...prev, { role: 'assistant', content: 'Iniciando sistema... por favor espera.' }]);
       return;
     }
 
-
     const newUserMessage: Message = { role: 'user', content: userInput };
-    const currentMessages = [...messages, newUserMessage]; // Guardar estado actual
+    const currentMessages = [...messages, newUserMessage];
     setMessages(currentMessages);
     setUserInput('');
-    setIsLoading(true); // Indicar que está cargando
+    setIsLoading(true);
 
-    // Añadir mensaje temporal de "pensando..."
+    // Initial placeholder
     setMessages(prev => [...prev, { role: 'assistant', content: '...' }]);
-
 
     try {
       let assistantResponse = '';
-
-      // Construir el historial de mensajes para el prompt
-      // NOTA: Con la nueva instrucción de sistema, ya no necesitamos concatenar todo en el prompt del usuario
-      // si usamos la propiedad systemInstruction del modelo, pero para mantener compatibilidad y asegurar
-      // que el contexto esté presente, lo pasamos explícitamente.
-
-      const historyForPrompt = currentMessages.map(msg => `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`).join('\n');
-
-      // El initialPrompt[0].text ahora contiene TODA la instrucción con el contexto inyectado
       const systemInstruction = initialPrompt[0].text;
 
-      if (model) {
-        // --- Usar el SDK de Gemini ---
-        console.log("Using Gemini SDK with Enhanced Context");
+      if (backend === 'local') {
+        // --- LOCAL MODEL EXECUTION ---
+        if (!localPipelineRef.current) {
+          if (isPipelineLoadingRef.current) {
+            throw new Error("El modelo local se está cargando, por favor espera un momento.");
+          } else {
+            await initLocalModel();
+            if (!localPipelineRef.current) throw new Error("Modelo local no disponible.");
+          }
+        }
 
-        const result: GenerateContentResult = await model.generateContent({
+        // --- Prompt Construction for Gemma 3 ---
+        const conversationHistory = currentMessages.map(m =>
+          `<start_of_turn>${m.role === 'user' ? 'user' : 'model'}\n${m.content}<end_of_turn>`
+        ).join('\n');
+
+        const fullPrompt = `<start_of_turn>user\n${systemInstruction}\n\nContext:\n${conversationHistory}<end_of_turn><start_of_turn>model\n`;
+
+        console.log("Running Local Gemma 3 1B...");
+        const output = await localPipelineRef.current(fullPrompt, {
+          max_new_tokens: 256,
+          temperature: 0.1,
+          do_sample: false,
+        });
+
+        const rawText = output[0].generated_text;
+        assistantResponse = rawText.startsWith(fullPrompt) ? rawText.slice(fullPrompt.length) : rawText;
+        assistantResponse = assistantResponse.replace(/<end_of_turn>$/, '').trim();
+
+      } else {
+        // --- GEMINI EXECUTION ---
+        console.log("Using Gemini SDK");
+
+        if (!geminiModel) throw new Error("No Gemini model available.");
+
+        // History construction
+        const historyForPrompt = currentMessages.map(msg =>
+          `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}`
+        ).join('\n');
+
+        const result: GenerateContentResult = await geminiModel.generateContent({
           contents: [{ role: "user", parts: [{ text: historyForPrompt }] }],
           generationConfig,
-          systemInstruction: systemInstruction // Usamos la propiedad nativa de systemInstruction
+          systemInstruction: systemInstruction
         });
 
         assistantResponse = result.response.text();
-        console.log("Response from SDK:", assistantResponse);
-      } else {
-        throw new Error("No model available (SDK).");
       }
 
-      // Reemplazar el mensaje "pensando..." con la respuesta real
+      // Update UI with response
       setMessages(prev => {
         const updatedMessages = [...prev];
-        const lastAssistantMsgIndex = updatedMessages.findLastIndex(msg => msg.role === 'assistant');
-        let finalMessages = updatedMessages;
-        if (lastAssistantMsgIndex !== -1 && updatedMessages[lastAssistantMsgIndex].content === '...') {
-          updatedMessages[lastAssistantMsgIndex] = { role: 'assistant', content: assistantResponse || 'No se recibió respuesta.' };
-          finalMessages = updatedMessages;
+        const lastMsgIndex = updatedMessages.length - 1;
+        if (updatedMessages[lastMsgIndex].content === '...') {
+          updatedMessages[lastMsgIndex] = { role: 'assistant', content: assistantResponse || 'No res.' };
         } else {
-          finalMessages = [...updatedMessages, { role: 'assistant', content: assistantResponse || 'No se recibió respuesta.' }];
-          // Return valid React state update, but we need finalMessages for logging
-          // React state updates are scheduled, so we can't trust 'messages' immediately.
-          // However, we are inside a callback where we know the prev structure.
+          // In case of race conditions or React batching weirdness
+          updatedMessages.push({ role: 'assistant', content: assistantResponse });
         }
 
-        // --- LOGGING TO REDIS ---
+        // Log to Redis
         fetch('/api/log-chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            messages: finalMessages,
+            messages: updatedMessages,
             timestamp: new Date().toISOString()
           })
         }).catch(err => console.error("Error logging chat:", err));
 
-        return finalMessages;
-      });
-
-
-    } catch (error) {
-      console.error('Error al comunicarse con la API de Gemini:', error);
-      // Reemplazar el mensaje "pensando..." con el mensaje de error
-      setMessages(prev => {
-        const updatedMessages = [...prev];
-        const lastAssistantMsgIndex = updatedMessages.findLastIndex(msg => msg.role === 'assistant');
-        if (lastAssistantMsgIndex !== -1 && updatedMessages[lastAssistantMsgIndex].content === '...') {
-          updatedMessages[lastAssistantMsgIndex] = { role: 'assistant', content: 'Lo siento, hubo un error técnico. Intenta de nuevo más tarde.' };
-        } else {
-          updatedMessages.push({ role: 'assistant', content: 'Lo siento, hubo un error técnico.' });
-        }
         return updatedMessages;
       });
+
+    } catch (error: any) {
+      console.error('Error generating response:', error);
+
+      // Fallback message
+      const errorMsg = error.message || 'Error desconocido';
+      setMessages(prev => {
+        const updated = [...prev];
+        const lastMsg = updated[updated.length - 1];
+        if (lastMsg.content === '...') {
+          lastMsg.content = `Error: ${errorMsg}. ${backend === 'local' ? 'Intenta recargar o usar Gemini.' : ''}`;
+        }
+        return updated;
+      });
+
+      // If local failed HARD, maybe switch to Gemini for next turn?
+      if (backend === 'local' && (errorMsg.includes('unavailable') || errorMsg.includes('Model'))) {
+        setBackend('gemini');
+      }
     } finally {
-      setIsLoading(false); // Terminar carga
+      setIsLoading(false);
     }
   };
 
@@ -201,20 +318,42 @@ export default function ChatBotComponent() {
       <div className={`${styles.chatBotContainer} ${isOpen ? styles.show : ''}`}>
         <div className={styles.cardBorder}>
           <div className={styles.cardHeader}>
-            <h5 className={styles.cardHeaderText}>Chat with CyberStack</h5>
+            <div className="flex flex-col">
+              <h5 className={styles.cardHeaderText}>Chat with CyberStack</h5>
+              <span className="text-[10px] text-gray-400 opacity-80" suppressHydrationWarning>
+                {backend === 'local' ? '⚡ Running Locally (Gemma 3 1B)' : backend === 'gemini' ? '☁️ Powered by Gemini' : 'Checking hardware...'}
+              </span>
+            </div>
             <button className={`${styles.minimizeBtn} ${styles.noMargin}`} onClick={handleOpenChat}>
               <FaMinus />
             </button>
           </div>
 
           <div className={styles.chatMessages} ref={chatContainerRef}>
+            {/* Show local loading status */}
+            {backend === 'local' && localModelStatus && (
+              <div className="w-full bg-gray-900/50 p-2 text-xs text-blue-300 text-center mb-2 border-b border-gray-800 flex justify-between items-center">
+                <span className="flex-grow text-center">{localModelStatus}</span>
+                <button
+                  onClick={() => {
+                    console.log("User aborted local load. Switching to Gemini.");
+                    setBackend('gemini');
+                    setLocalModelStatus('');
+                  }}
+                  className="text-gray-400 hover:text-white ml-2 p-1 focus:outline-none"
+                  title="Cancelar y usar Gemini"
+                >
+                  <FaTimes />
+                </button>
+              </div>
+            )}
+
             {messages.map((msg, index) => (
               <div key={index} className={`${styles.message} ${msg.role === 'user' ? styles.messageUser : styles.messageAssistant}`}>
                 <div className={`${styles.messageAlert} ${msg.role === 'user' ? styles.messageUserAlert : styles.messageAssistantAlert}`}>
                   <strong className={styles.messageSender}>{msg.role === 'user' ? 'Tú' : 'CyberStack'}: </strong>
-                  {/* Evitar renderizar ReactMarkdown para el mensaje "..." */}
                   {msg.content === '...' ? (
-                    '...'
+                    <span className="animate-pulse">...</span>
                   ) : (
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                       {msg.content}
@@ -223,15 +362,6 @@ export default function ChatBotComponent() {
                 </div>
               </div>
             ))}
-            {/* Mostrar indicador de carga visualmente */}
-            {isLoading && messages[messages.length - 1]?.content !== '...' && (
-              <div className={`${styles.message} ${styles.messageAssistant}`}>
-                <div className={`${styles.messageAlert} ${styles.messageAssistantAlert}`}>
-                  <strong className={styles.messageSender}>CyberStack: </strong>
-                  ...
-                </div>
-              </div>
-            )}
           </div>
 
           <div className={styles.cardFooter}>
@@ -241,18 +371,17 @@ export default function ChatBotComponent() {
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
                 onKeyDown={(e) => {
-                  // Enviar con Enter (sin Shift)
                   if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault(); // Prevenir salto de línea
+                    e.preventDefault();
                     handleSendMessage();
                   }
                 }}
                 placeholder="Escribe tu mensaje..."
                 rows={1}
-                disabled={isLoading} // Deshabilitar mientras carga
+                disabled={isLoading || (backend === 'local' && !!localModelStatus && !localPipelineRef.current)}
               />
-              <button className={styles.buttonSend} onClick={handleSendMessage} disabled={isLoading}>
-                {isLoading ? 'Enviando...' : 'Enviar'}
+              <button className={styles.buttonSend} onClick={handleSendMessage} disabled={isLoading || (backend === 'local' && !!localModelStatus && !localPipelineRef.current)}>
+                {isLoading ? '...' : 'Enviar'}
               </button>
             </div>
           </div>

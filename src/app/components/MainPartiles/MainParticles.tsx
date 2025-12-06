@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import Particles from "@/app/components/Particles/particles";
-import ChatBotComponent from '../ChatBot/ChatBootComponent';
 
 export const MainParticles = () => {
   return (
@@ -22,7 +21,6 @@ export const MainParticles = () => {
           I am a full stack software developer, with knowledge of ethical hacking
         </h2>
       </div>
-      < ChatBotComponent />
     </main>
   )
 }
